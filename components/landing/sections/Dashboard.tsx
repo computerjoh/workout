@@ -4,9 +4,18 @@ import { BarChart3, Clock, Dumbbell, HeartHandshake, PlayCircle } from "lucide-r
 import { FeatureLine } from "../FeatureLine";
 import { FloatingScreenshot } from "../FloatingScreenshot";
 
+const dashboardHighlights = [
+    { icon: <BarChart3 className="h-4 w-4" />, label: "Auto-organized workflow", detail: "Daily list prioritizes clients needing action." },
+    { icon: <Clock className="h-4 w-4" />, label: "Track missed & completed workouts", detail: "Spot trends before churn happens." },
+    { icon: <Dumbbell className="h-4 w-4" />, label: "Clients needing programming", detail: "Plan progressions weeks ahead of schedule." },
+    { icon: <HeartHandshake className="h-4 w-4" />, label: "Daily priorities surfaced", detail: "Instant notifications for check-ins and PRs." },
+    { icon: <PlayCircle className="h-4 w-4" />, label: "Fast & efficient communication", detail: "Reply with voice, video, or quick templates." },
+];
+
 export default function Dashboard() {
     return (
-        <section className="mx-auto max-w-6xl px-4 py-24">
+        <section className="relative mx-auto max-w-6xl px-4 py-24">
+            <div className="pointer-events-none absolute inset-y-10 right-0 -z-10 w-1/2 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
             <div className="grid items-center gap-12 md:grid-cols-2">
 
                 <div className="order-2 md:order-1">
@@ -26,14 +35,14 @@ export default function Dashboard() {
                         Know exactly who needs your attention today.
                     </h2>
 
-                    <p className="mt-4 text-sm text-muted-foreground md:text-base"> Instantly see unread messages, missed workouts, completed sessions, and clients who need programming. Spend less time guessing — and more time coaching. </p>
+                    <p className="mt-4 text-sm text-muted-foreground md:text-base">
+                        Instantly see unread messages, missed workouts, completed sessions, and clients who need programming. Spend less time guessing — and more time coaching.
+                    </p>
 
                     <div className="mt-6 space-y-4">
-                        <FeatureLine icon={<BarChart3 className="h-4 w-4" />} label="Auto-organized workflow" />
-                        <FeatureLine icon={<Clock className="h-4 w-4" />} label="Track missed & completed workouts" />
-                        <FeatureLine icon={<Dumbbell className="h-4 w-4" />} label="Clients needing programming" />
-                        <FeatureLine icon={<HeartHandshake className="h-4 w-4" />} label="Daily priorities surfaced" />
-                        <FeatureLine icon={<PlayCircle className="h-4 w-4" />} label="Fast & efficient communication" />
+                        {dashboardHighlights.map((item) => (
+                            <FeatureLine key={item.label} icon={item.icon} label={item.label} detail={item.detail} />
+                        ))}
                     </div>
                 </div>
 

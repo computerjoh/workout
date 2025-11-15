@@ -4,11 +4,13 @@ export interface FeatureBlockProps {
     eyebrow: string;
     title: string;
     description: string;
+    icon?: React.ReactNode;
 }
 
-export const FeatureBlock = ({ eyebrow, title, description }: FeatureBlockProps) => {
+export const FeatureBlock = ({ eyebrow, title, description, icon }: FeatureBlockProps) => {
     return (
-        <div>
+        <div className="h-full rounded-2xl border border-white/10 bg-background/80 p-6 shadow-sm">
+            {icon && <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3 text-primary">{icon}</div>}
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                 {eyebrow}
             </p>

@@ -2,9 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 
+const ctaStats = [
+    { label: "Avg. NPS", value: "+74" },
+    { label: "Client completion", value: "92%" },
+    { label: "Faster onboarding", value: "<10 min" },
+];
+
 export default function FinalCTA() {
     return (
-        <section className="mx-auto max-w-3xl px-4 py-20 text-center">
+        <section className="mx-auto max-w-4xl px-4 py-20 text-center">
             <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
                 Ready to focus on what you do best?
             </h2>
