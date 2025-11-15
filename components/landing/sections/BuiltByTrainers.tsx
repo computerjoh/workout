@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Dumbbell, BarChart3 } from "lucide-react";
 import { FeatureCard } from "../FeatureCard";

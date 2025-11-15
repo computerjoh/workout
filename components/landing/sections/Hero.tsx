@@ -1,10 +1,6 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { FloatingScreenshot } from "@/components/landing/FloatingScreenshot";
 import { Clock, HeartHandshake, PlayCircle } from "lucide-react";
-
-const marqueeLogos = ["ForgeFit", "Park Slope PT", "Motion Lab", "TrainBold", "Halo Studio", "Formed", "Northwind Coaching", "Peak Circuit"];
 
 const heroStats = [
     { value: "6h", label: "avg. admin time saved weekly" },

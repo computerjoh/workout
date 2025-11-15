@@ -1,8 +1,4 @@
-"use client";
-
-import Image from "next/image";
 import { PlayCircle } from "lucide-react";
-import React from "react";
 
 export default function SeeItInAction() {
     return (

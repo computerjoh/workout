@@ -1,5 +1,3 @@
-"use client";
-
 import { FeatureBlock } from "../FeatureBlock";
 import { Sparkles, Timer, UsersRound } from "lucide-react";
 

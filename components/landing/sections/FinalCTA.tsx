@@ -1,12 +1,4 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-
-const ctaStats = [
-    { label: "Avg. NPS", value: "+74" },
-    { label: "Client completion", value: "92%" },
-    { label: "Faster onboarding", value: "<10 min" },
-];
 
 export default function FinalCTA() {
     return (

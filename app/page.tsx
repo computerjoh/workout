@@ -1,5 +1,3 @@
-"use client";
-
 import BuiltByTrainers from "@/components/landing/sections/BuiltByTrainers";
 import Dashboard from "@/components/landing/sections/Dashboard";
 import Features from "@/components/landing/sections/Features";
@@ -9,7 +7,6 @@ import Hero from "@/components/landing/sections/Hero";
 import Pricing from "@/components/landing/sections/Pricing";
 import SeeItInAction from "@/components/landing/sections/SeeItInAction";
 import WorkoutBuilder from "@/components/landing/sections/WorkoutBuilder";
-import React from "react";
 
 export default function LandingPage() {
   return (

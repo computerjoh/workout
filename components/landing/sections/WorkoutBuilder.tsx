@@ -1,5 +1,3 @@
-"use client";
-
 import { BarChart3, Clock, Dumbbell, HeartHandshake, PlayCircle } from "lucide-react";
 import { FeatureLine } from "../FeatureLine";
 import { FloatingScreenshot } from "../FloatingScreenshot";
