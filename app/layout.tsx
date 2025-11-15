@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preload" as="image" href="/screenshots/dashboard.png" />
+        <link rel="preload" as="image" href="/screenshots/dashboard.webp" />
       </head>
       <body
         className={cn(

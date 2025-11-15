@@ -10,7 +10,7 @@ export default function Dashboard() {
 
                 <div className="order-2 md:order-1">
                     <FloatingScreenshot
-                        src="/screenshots/dashboard.png"
+                        src="/screenshots/dashboard.webp"
                         alt="Trainer Dashboard"
                         className="max-w-2xl md:max-w-3xl"
                     />

@@ -7,7 +7,7 @@ export default function Header() {
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
                 <div className="flex items-center gap-2">
                     <Image
-                        src="/logo.png"
+                        src="/logo.webp"
                         alt="The Lab logo"
                         width={48}
                         height={48}

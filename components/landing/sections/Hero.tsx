@@ -64,7 +64,7 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <FloatingScreenshot src="/screenshots/dashboard.png" alt="Preview of The Lab dashboard" className="max-w-3xl" />
+                <FloatingScreenshot src="/screenshots/dashboard.webp" alt="Preview of The Lab dashboard" className="max-w-3xl" />
             </div>
         </section>
     );

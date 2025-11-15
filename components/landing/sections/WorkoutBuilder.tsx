@@ -27,7 +27,7 @@ export default function WorkoutBuilder() {
                 </div>
 
                 <FloatingScreenshot
-                    src="/screenshots/workout-builder.png"
+                    src="/screenshots/workout-builder.webp"
                     alt="Workout Builder UI"
                     className="max-w-2xl md:max-w-3xl"
                 />
