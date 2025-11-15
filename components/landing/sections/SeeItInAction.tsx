@@ -27,6 +27,7 @@ export default function SeeItInAction() {
                                 src="https://www.youtube.com/embed/ORomU-MdJKY?rel=0&modestbranding=1"
                                 allowFullScreen
                                 title="The Lab Walkthrough"
+                                loading="lazy"
                             />
                             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-100 transition-opacity duration-500 group-hover:opacity-0">
