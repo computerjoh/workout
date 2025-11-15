@@ -1,0 +1,41 @@
+"use client";
+
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
+export default function Header() {
+    return (
+        <header className="sticky top-0 z-20 w-full border-b bg-background/70 backdrop-blur">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+                <div className="flex items-center gap-2">
+                    <Image
+                        src="/logo.png"
+                        alt="The Lab logo"
+                        width={48}
+                        height={48}
+                        className="rounded-xl"
+                        priority
+                    />
+
+                    <div className="flex flex-col leading-tight">
+                        <span className="text-sm font-semibold tracking-tight">
+                            The Lab
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                            Built for personal trainers
+                        </span>
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                    <Button variant="outline" className="rounded-xl text-xs">
+                        Sign In
+                    </Button>
+                    <Button className="hidden rounded-xl text-xs font-semibold sm:inline-flex">
+                        Start Free Trial
+                    </Button>
+                </div>
+            </div>
+        </header>
+    );
+}
