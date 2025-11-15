@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BuiltByTrainers from "@/components/landing/sections/BuiltByTrainers";
 import Dashboard from "@/components/landing/sections/Dashboard";
 import Features from "@/components/landing/sections/Features";
@@ -42,9 +43,12 @@ export default function LandingPage() {
                 Under 10 minutes to get your first client onboarded.
               </span>
             </div>
-            <button className="h-9 rounded-xl px-4 text-xs font-semibold bg-primary text-background">
+            <Link
+              href="/sign-up"
+              className="h-9 rounded-xl px-4 text-xs font-semibold bg-primary text-background"
+            >
               Get started
-            </button>
+            </Link>
           </div>
         </div>
       </div>

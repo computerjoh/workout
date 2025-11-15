@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function FinalCTA() {
@@ -12,8 +13,8 @@ export default function FinalCTA() {
             </p>
 
             <div className="mt-8 flex flex-col items-center gap-3">
-                <Button variant="hero" size="xl">
-                    Start Free Trial
+                <Button variant="hero" size="xl" asChild>
+                    <Link href="/sign-up">Start Free Trial</Link>
                 </Button>
 
                 <p className="text-xs text-muted-foreground">

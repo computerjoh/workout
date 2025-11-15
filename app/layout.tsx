@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
@@ -29,15 +30,17 @@ export default function RootLayout({
       <head>
         <link rel="preload" as="image" href="/screenshots/dashboard.webp" />
       </head>
-      <body
-        className={cn(
-          "dark",
-          geistSans.variable,
-          geistMono.variable
-        )}
-      >
-        {children}
-      </body>
+      <ClerkProvider>
+        <body
+          className={cn(
+            "dark",
+            geistSans.variable,
+            geistMono.variable
+          )}
+        >
+          {children}
+        </body>
+      </ClerkProvider>
     </html>
   );
 }

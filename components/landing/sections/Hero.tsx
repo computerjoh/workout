@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { heroStats } from "@/components/landing/constants";
 import { Button } from "@/components/ui/button";
 import { FloatingScreenshot } from "@/components/landing/FloatingScreenshot";
@@ -22,8 +23,8 @@ export default function Hero() {
                     </p>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <Button variant="hero" size="xl">
-                            Start Free Trial (14 Days)
+                        <Button variant="hero" size="xl" asChild>
+                            <Link href="/sign-up">Start Free Trial (14 Days)</Link>
                         </Button>
 
                         <Button

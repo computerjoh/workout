@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function Header() {
@@ -26,11 +27,18 @@ export default function Header() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <Button variant="ghost" className="hidden rounded-xl text-xs font-semibold text-muted-foreground hover:text-foreground sm:inline-flex">
-                        Sign In
+                    <Button
+                        variant="ghost"
+                        asChild
+                        className="hidden rounded-xl text-xs font-semibold text-muted-foreground hover:text-foreground sm:inline-flex"
+                    >
+                        <Link href="/sign-in">Sign In</Link>
                     </Button>
-                    <Button className="rounded-xl bg-gradient-to-r from-primary to-primary/70 text-xs font-semibold text-background shadow-lg shadow-primary/30">
-                        Start Free Trial
+                    <Button
+                        asChild
+                        className="rounded-xl bg-gradient-to-r from-primary to-primary/70 text-xs font-semibold text-background shadow-lg shadow-primary/30"
+                    >
+                        <Link href="/sign-up">Start Free Trial</Link>
                     </Button>
                 </div>
             </div>
