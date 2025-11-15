@@ -1,7 +1,7 @@
-import React from "react";
+import type { ReactNode } from "react";
 
 export interface FeatureLineProps {
-    icon: React.ReactNode;
+    icon: ReactNode;
     label: string;
     detail?: string;
 }

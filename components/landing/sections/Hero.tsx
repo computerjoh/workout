@@ -1,12 +1,7 @@
+import { heroStats } from "@/components/landing/constants";
 import { Button } from "@/components/ui/button";
 import { FloatingScreenshot } from "@/components/landing/FloatingScreenshot";
 import { Clock, HeartHandshake, PlayCircle } from "lucide-react";
-
-const heroStats = [
-    { value: "6h", label: "avg. admin time saved weekly" },
-    { value: "38%", label: "faster client onboarding" },
-    { value: "4.9★", label: "trainer-rated client experience" },
-];
 
 export default function Hero() {
     return (
@@ -27,7 +22,7 @@ export default function Hero() {
                     </p>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <Button className="h-11 rounded-xl px-6 text-sm font-semibold shadow-lg shadow-primary/30 transition-all hover:-translate-y-0.5 hover:shadow-primary/40">
+                        <Button variant="hero" size="xl">
                             Start Free Trial (14 Days)
                         </Button>
 

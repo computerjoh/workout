@@ -1,14 +1,6 @@
-import { BarChart3, Clock, Dumbbell, HeartHandshake, PlayCircle } from "lucide-react";
+import { dashboardHighlights } from "@/components/landing/constants";
 import { FeatureLine } from "../FeatureLine";
 import { FloatingScreenshot } from "../FloatingScreenshot";
-
-const dashboardHighlights = [
-    { icon: <BarChart3 className="h-4 w-4" />, label: "Auto-organized workflow", detail: "Daily list prioritizes clients needing action." },
-    { icon: <Clock className="h-4 w-4" />, label: "Track missed & completed workouts", detail: "Spot trends before churn happens." },
-    { icon: <Dumbbell className="h-4 w-4" />, label: "Clients needing programming", detail: "Plan progressions weeks ahead of schedule." },
-    { icon: <HeartHandshake className="h-4 w-4" />, label: "Daily priorities surfaced", detail: "Instant notifications for check-ins and PRs." },
-    { icon: <PlayCircle className="h-4 w-4" />, label: "Fast & efficient communication", detail: "Reply with voice, video, or quick templates." },
-];
 
 export default function Dashboard() {
     return (

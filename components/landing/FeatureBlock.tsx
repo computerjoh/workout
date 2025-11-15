@@ -1,10 +1,10 @@
-import React from "react";
+import type { ReactNode } from "react";
 
 export interface FeatureBlockProps {
     eyebrow: string;
     title: string;
     description: string;
-    icon?: React.ReactNode;
+    icon?: ReactNode;
 }
 
 export const FeatureBlock = ({ eyebrow, title, description, icon }: FeatureBlockProps) => {

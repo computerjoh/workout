@@ -1,14 +1,6 @@
-import { BarChart3, Clock, Dumbbell, HeartHandshake, PlayCircle } from "lucide-react";
+import { builderHighlights } from "@/components/landing/constants";
 import { FeatureLine } from "../FeatureLine";
 import { FloatingScreenshot } from "../FloatingScreenshot";
-
-const builderHighlights = [
-    { icon: <Dumbbell className="h-4 w-4" />, label: "Timeline-based drag & drop", detail: "Build multi-phase programs without fighting spreadsheets." },
-    { icon: <BarChart3 className="h-4 w-4" />, label: "Supersets & circuits support", detail: "Stack complex progressions with automatic pacing." },
-    { icon: <PlayCircle className="h-4 w-4" />, label: "Built-in video previews", detail: "Embed cues so athletes know exactly how to move." },
-    { icon: <HeartHandshake className="h-4 w-4" />, label: "Coaching notes", detail: "Tag intent, tempo, and reminders your clients won’t miss." },
-    { icon: <Clock className="h-4 w-4" />, label: "Duplicate days in 1 tap", detail: "Train smarter templates save ~2.5 hours each week." },
-];
 
 export default function WorkoutBuilder() {
     return (

@@ -12,7 +12,7 @@ export default function FinalCTA() {
             </p>
 
             <div className="mt-8 flex flex-col items-center gap-3">
-                <Button className="h-11 rounded-xl px-6 text-sm font-semibold shadow-lg shadow-primary/30 transition-all hover:-translate-y-0.5 hover:shadow-primary/40">
+                <Button variant="hero" size="xl">
                     Start Free Trial
                 </Button>
 
