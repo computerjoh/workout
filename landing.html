@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Lab | Workout Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { darkMode: "class", theme: { extend: { colors: { background: "var(--background)", foreground: "var(--foreground)", primary: "var(--primary)", "primary-foreground": "var(--primary-foreground)", secondary: "var(--secondary)", "secondary-foreground": "var(--secondary-foreground)", muted: "var(--muted)", "muted-foreground": "var(--muted-foreground)", accent: "var(--accent)", "accent-foreground": "var(--accent-foreground)", card: "var(--card)", "card-foreground": "var(--card-foreground)", border: "var(--border)", input: "var(--input)", ring: "var(--ring)" }, borderRadius: { xl: "calc(0.65rem + 4px)", lg: "0.65rem", md: "calc(0.65rem - 2px)", sm: "calc(0.65rem - 4px)", }, boxShadow: { card: "0 20px 60px -28px rgba(0,0,0,0.45)" }, }, }, } </script>
+  <style>
+    :root {
+      --background: oklch(0.141 0.005 285.823);
+      --foreground: oklch(0.985 0 0);
+      --primary: oklch(0.648 0.2 131.684);
+      --primary-foreground: oklch(0.986 0.031 120.757);
+      --secondary: oklch(0.274 0.006 286.033);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.274 0.006 286.033);
+      --muted-foreground: oklch(0.705 0.015 286.067);
+      --accent: oklch(0.274 0.006 286.033);
+      --accent-foreground: oklch(0.985 0 0);
+      --card: oklch(0.21 0.006 285.885);
+      --card-foreground: oklch(0.985 0 0);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.405 0.101 131.063);
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+      height: 2.75rem;
+      padding: 0 1rem;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 12px 30px -20px rgba(35, 181, 115, 0.6);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted-foreground);
+    }
+
+    .btn-ghost:hover {
+      color: var(--foreground);
+    }
+
+    .lift {
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 60px -28px rgba(0, 0, 0, 0.5);
+    }
+
+    .icon-primary {
+      color: var(--primary);
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen flex-col bg-background text-foreground"> <svg class="hidden">
+    <symbol id="icon-play" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
+      <path d="M10 8l6 4-6 4Z" fill="currentColor"></path>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
+      <path d="M12 6v6l3 2"></path>
+    </symbol>
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M12 21s-6.5-4.35-9-9a5.5 5.5 0 0 1 9-5.5A5.5 5.5 0 0 1 21 12c-2.5 4.65-9 9-9 9Z" stroke="currentColor"
+        stroke-width="2" fill="none" />
+    </symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path d="M3 3v18h18" stroke="currentColor" stroke-width="2" fill="none" />
+      <rect x="7" y="10" width="3" height="7" rx="1" stroke="currentColor" stroke-width="2" />
+      <rect x="12" y="6" width="3" height="11" rx="1" stroke="currentColor" stroke-width="2" />
+      <rect x="17" y="12" width="3" height="5" rx="1" stroke="currentColor" stroke-width="2" />
+    </symbol>
+    <symbol id="icon-dumbbell" viewBox="0 0 24 24">
+      <path d="M3 14v-4M7 14v-4M17 14v-4M21 14v-4" stroke="currentColor" stroke-width="2" />
+      <rect x="7" y="10" width="10" height="4" rx="1" stroke="currentColor" stroke-width="2" />
+    </symbol>
+  </svg>
+  <div class="relative flex flex-1 flex-col">
+    <header class="sticky top-0 z-20 w-full bg-background/80 backdrop-blur border-b border-white/10 shadow-sm">
+      <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3"> <img src="./public/logo.webp" class="h-12 w-12 rounded-xl object-cover"
+            alt="The Lab logo" />
+          <div>
+            <div class="text-sm font-semibold">The Lab</div>
+            <div class="text-xs text-muted-foreground">Built for personal trainers</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3"> <a href="/login" class="btn btn-ghost hidden sm:inline-flex text-xs">Sign
+            In</a> <a href="/signup" class="btn btn-primary text-xs">Start Free Trial</a> </div>
+      </div>
+    </header>
+    <main class="relative z-10 flex-1">
+      <section id="product" class="relative mx-auto max-w-6xl px-4 py-16 md:py-20">
+        <div
+          class="pointer-events-none absolute inset-x-0 -top-8 -z-10 h-[420px] blur-2xl bg-[radial-gradient(circle_at_30%_40%,var(--primary)/0.25,transparent_45%),radial-gradient(circle_at_70%_30%,var(--primary)/0.18,transparent_40%),radial-gradient(circle_at_50%_100%,var(--primary)/0.12,transparent_50%)]">
+        </div>
+        <div class="grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+          <div class="max-w-xl"> <span
+              class="inline-flex items-center gap-2 rounded-full border border-primary bg-primary/5 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
+              Built for modern trainers </span>
+            <h1 class="mt-6 text-4xl font-black tracking-tight sm:text-5xl md:text-6xl"> Deliver world-class workouts.
+              <span class="block text-primary">Build better connections.</span>
+            </h1>
+            <p class="mt-5 max-w-lg text-base text-muted-foreground md:text-lg"> Stop juggling spreadsheets and generic
+              apps. The Lab keeps programming, communication, and accountability in one beautiful workflow so you can
+              stay present with every athlete. </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"> <a href="/signup"
+                class="btn btn-primary h-12 px-6 text-sm">Start Free Trial (14 Days)</a> <a href="#watch-demo"
+                class="btn btn-ghost h-11 px-3 text-sm"> <svg class="icon-primary h-4 w-4">
+                  <use href="#icon-play" />
+                </svg> Watch product walkthrough </a> </div>
+            <p class="mt-3 text-xs text-muted-foreground"> 14 days free, then starts at <span
+                class="font-semibold">$19.99/month</span>. No setup fees. Cancel anytime. </p>
+            <div class="mt-6 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+              <div class="flex items-center gap-2"> <svg class="icon-primary h-3.5 w-3.5">
+                  <use href="#icon-clock" />
+                </svg> <span>Under 10 minutes to onboard your first client.</span> </div>
+              <div class="flex items-center gap-2"> <svg class="icon-primary h-3.5 w-3.5">
+                  <use href="#icon-heart" />
+                </svg> <span>Built by trainers who coach every week.</span> </div>
+            </div>
+          </div>
+          <div class="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl shadow-black/40 lift">
+            <img src="./public/screenshots/dashboard.webp" alt="The Lab dashboard"
+              class="w-full rounded-2xl object-cover" />
+          </div>
+        </div>
+      </section>
+      <section class="relative border-y border-white/10 bg-muted/20 py-24">
+        <div class="mx-auto max-w-6xl px-4">
+          <div class="pointer-events-none absolute inset-y-10 right-0 -z-10 w-1/2 rounded-full bg-primary/10 blur-3xl">
+          </div>
+          <div class="grid items-center gap-12 md:grid-cols-2">
+            <div
+              class="order-2 md:order-1 relative mx-auto w-full max-w-2xl overflow-hidden rounded-2xl shadow-2xl shadow-black/40 lift">
+              <img src="./public/screenshots/dashboard.webp" alt="Trainer dashboard"
+                class="w-full rounded-2xl object-cover" />
+            </div>
+            <div class="order-1 md:order-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Smart Coaching Dashboard</p>
+              <h2 class="mt-3 text-3xl font-bold tracking-tight md:text-4xl"> Know exactly who needs your attention
+                today. </h2>
+              <p class="mt-4 text-sm text-muted-foreground md:text-base"> Instantly see unread messages, missed
+                workouts, completed sessions, and clients who need programming. Spend less time guessing — and more time
+                coaching. </p>
+              <div class="mt-6 space-y-4">
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="h-4 w-4 icon-primary">
+                      <use href="#icon-chart" />
+                    </svg> </div>
+                  <div>
+                    <p class="text-sm font-semibold">Auto-organized workflow</p>
+                    <p class="text-xs text-muted-foreground">Daily list prioritizes clients needing action.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="h-4 w-4 icon-primary">
+                      <use href="#icon-clock" />
+                    </svg> </div>
+                  <div>
+                    <p class="text-sm font-semibold">Track missed &amp; completed workouts</p>
+                    <p class="text-xs text-muted-foreground">Spot trends before churn happens.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="h-4 w-4 icon-primary">
+                      <use href="#icon-dumbbell" />
+                    </svg> </div>
+                  <div>
+                    <p class="text-sm font-semibold">Clients needing programming</p>
+                    <p class="text-xs text-muted-foreground">Plan progressions weeks ahead.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="h-4 w-4 icon-primary">
+                      <use href="#icon-heart" />
+                    </svg> </div>
+                  <div>
+                    <p class="text-sm font-semibold">Daily priorities surfaced</p>
+                    <p class="text-xs text-muted-foreground">Instant notifications for check-ins and PRs.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="h-4 w-4 icon-primary">
+                      <use href="#icon-play" />
+                    </svg> </div>
+                  <div>
+                    <p class="text-sm font-semibold">Fast communication</p>
+                    <p class="text-xs text-muted-foreground">Reply with voice, video, or templates.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="relative mx-auto max-w-6xl px-4 py-24">
+        <div
+          class="pointer-events-none absolute inset-y-10 left-1/2 -z-10 w-2/3 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl">
+        </div>
+        <div class="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Powerful Programming</p>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight md:text-4xl">Build professional workouts in minutes.</h2>
+            <p class="mt-4 text-sm text-muted-foreground md:text-base"> Drag-and-drop exercises into a timeline-style
+              builder. Add sets, reps, rest times, videos, and notes all in one place. </p>
+            <div class="mt-6 space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-dumbbell" />
+                  </svg> </div>
+                <div>
+                  <p class="text-sm font-semibold">Timeline-based drag &amp; drop</p>
+                  <p class="text-xs text-muted-foreground">No more spreadsheets.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-chart" />
+                  </svg> </div>
+                <div>
+                  <p class="text-sm font-semibold">Supersets &amp; circuits</p>
+                  <p class="text-xs text-muted-foreground">Build complex progressions easily.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-play" />
+                  </svg> </div>
+                <div>
+                  <p class="text-sm font-semibold">Built-in video previews</p>
+                  <p class="text-xs text-muted-foreground">Clear movement cues.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-heart" />
+                  </svg> </div>
+                <div>
+                  <p class="text-sm font-semibold">Coaching notes</p>
+                  <p class="text-xs text-muted-foreground">Intent, tempo, reminders.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-md bg-primary/10 p-1.5 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-clock" />
+                  </svg> </div>
+                <div>
+                  <p class="text-sm font-semibold">Duplicate days</p>
+                  <p class="text-xs text-muted-foreground">Save hours each week.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="relative mx-auto w-full max-w-2xl overflow-hidden rounded-2xl shadow-2xl shadow-black/40 lift md:max-w-3xl">
+            <img src="./public/screenshots/workout-builder.webp" alt="Workout Builder UI"
+              class="w-full rounded-2xl object-cover" />
+          </div>
+        </div>
+      </section>
+      <section id="watch-demo" class="border-y border-white/10 bg-muted/20 py-20">
+        <div class="mx-auto max-w-6xl px-4 text-center">
+          <h2 class="text-2xl font-bold tracking-tight md:text-3xl">See The Lab in action</h2>
+          <p class="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base"> Watch how The Lab elevates
+            coaching, programming, and client connection. </p>
+          <div class="mx-auto mt-10 max-w-4xl">
+            <div
+              class="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-background/80 p-5 text-left shadow-2xl shadow-black/40">
+              <div
+                class="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                <span class="h-2 w-2 rounded-full bg-primary"></span> <span
+                  class="h-2 w-2 rounded-full bg-primary/60"></span> <span
+                  class="h-2 w-2 rounded-full bg-primary/40"></span> <span>Product Walkthrough</span>
+              </div>
+              <div class="relative mt-4 aspect-video overflow-hidden rounded-2xl border border-white/10 bg-black/80">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ORomU-MdJKY"
+                  allowfullscreen></iframe>
+                <div
+                  class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="trainers" class="py-20">
+        <div class="mx-auto max-w-6xl px-4 grid gap-10 md:grid-cols-[1.1fr_0.9fr] items-center">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Built by trainers, for trainers
+            </p>
+            <h2 class="mt-3 text-2xl font-bold tracking-tight md:text-3xl"> We focus on what you do best: coaching.
+            </h2>
+            <p class="mt-4 text-sm text-muted-foreground md:text-base"> While others try to be everything to everyone,
+              The Lab is built around the reality of personal training: consistent, high-quality sessions and clear
+              communication. </p>
+            <div class="mt-8 space-y-6 border-l border-white/10 pl-6">
+              <div>
+                <p class="text-sm font-semibold text-primary">Coaches first</p>
+                <p class="text-sm text-muted-foreground">Our founders still coach 25+ sessions weekly.</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-primary">Templates that match reality</p>
+                <p class="text-sm text-muted-foreground">The Lab mirrors the exact way trainers structure progressions,
+                  not how engineers think they should.</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-primary">Client relationships</p>
+                <p class="text-sm text-muted-foreground">Messaging, video cues, and notes are built around
+                  trust-building moments.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-background/80 p-6 shadow-xl shadow-black/40">
+            <div class="space-y-6">
+              <div class="flex items-start gap-3">
+                <div class="mt-1 rounded-full bg-primary/10 p-2 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-chart" />
+                  </svg> </div>
+                <div>
+                  <h3 class="text-sm font-semibold">Smart Dashboard</h3>
+                  <p class="mt-1 text-xs text-muted-foreground">Instant visibility into who's on track, who missed a
+                    workout, and who needs a check-in.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="mt-1 rounded-full bg-primary/10 p-2 text-primary"> <svg class="icon-primary h-4 w-4">
+                    <use href="#icon-dumbbell" />
+                  </svg> </div>
+                <div>
+                  <h3 class="text-sm font-semibold">Workout Builder</h3>
+                  <p class="mt-1 text-xs text-muted-foreground">Drag-and-drop timelines with templates for fast,
+                    professional programming.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="border-y border-white/10 bg-muted/20 py-16">
+        <div class="mx-auto max-w-6xl px-4">
+          <div class="text-center">
+            <h2 class="text-2xl font-bold tracking-tight md:text-3xl">Simple, transparent pricing</h2>
+            <p class="mt-3 text-sm text-muted-foreground md:text-base">Start with 14 days free. No contracts.</p>
+          </div>
+          <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            <div class="rounded-2xl border border-white/10 bg-card/50 p-5 text-center shadow-lg shadow-black/30">
+              <h3 class="text-sm font-semibold text-white/90">1-5 clients</h3>
+              <p class="mt-3 text-3xl font-bold text-white">$19.99</p>
+              <p class="text-xs text-muted-foreground">per month</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-card/50 p-5 text-center shadow-lg shadow-black/30">
+              <h3 class="text-sm font-semibold text-white/90">6-15 clients</h3>
+              <p class="mt-3 text-3xl font-bold text-white">$39.99</p>
+              <p class="text-xs text-muted-foreground">per month</p>
+            </div>
+            <div
+              class="rounded-2xl border-2 border-primary bg-card/60 p-5 text-center shadow-xl shadow-primary/40 relative">
+              <div class="absolute inset-x-0 -top-3 flex justify-center"> <span
+                  class="rounded-full bg-primary px-3 py-0.5 text-[10px] font-semibold text-background shadow-sm">Most
+                  Popular</span> </div>
+              <h3 class="mt-2 text-sm font-semibold text-white">16-30 clients</h3>
+              <p class="mt-3 text-3xl font-bold text-primary">$69.99</p>
+              <p class="text-xs text-muted-foreground">per month</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-card/50 p-5 text-center shadow-lg shadow-black/30">
+              <h3 class="text-sm font-semibold text-white/90">31-50 clients</h3>
+              <p class="mt-3 text-3xl font-bold text-white">$99.99</p>
+              <p class="text-xs text-muted-foreground">per month</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-card/50 p-5 text-center shadow-lg shadow-black/30">
+              <h3 class="text-sm font-semibold text-white/90">51-100 clients</h3>
+              <p class="mt-3 text-3xl font-bold text-white">$149.99</p>
+              <p class="text-xs text-muted-foreground">per month</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-auto max-w-4xl px-4 py-20 text-center">
+        <h2 class="text-2xl font-bold tracking-tight md:text-3xl">Ready to focus on what you do best?</h2>
+        <p class="mt-3 text-sm text-muted-foreground md:text-base"> Join trainers who believe exceptional workout
+          delivery and genuine client connection build thriving coaching businesses. </p>
+        <div class="mt-8 flex flex-col items-center gap-3"> <a href="/signup"
+            class="btn btn-primary h-12 px-6 text-sm">Start Free Trial</a>
+          <p class="text-xs text-muted-foreground">14 days free • Cancel anytime • No credit card tricks</p>
+        </div>
+      </section>
+    </main>
+    <div class="pointer-events-none fixed inset-x-0 bottom-3 z-30 px-3 sm:hidden">
+      <div
+        class="pointer-events-auto rounded-2xl border bg-background/95 p-2 shadow-lg shadow-primary/30 backdrop-blur">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex flex-col"> <span class="text-xs font-semibold">Start your 14-day free trial</span> <span
+              class="text-[11px] text-muted-foreground">Get your first client onboarded fast.</span> </div> <a
+            href="/signup" class="btn btn-primary h-9 px-4 text-xs shadow-md shadow-primary/30">Get started</a>
+        </div>
+      </div>
+    </div>
+    <footer class="border-t border-white/10 py-5 text-center text-xs text-muted-foreground"> © <span id="year"></span>
+      The Lab. All rights reserved. </footer>
+  </div>
+  <script> document.getElementById("year").textContent = new Date().getFullYear(); </script>
+</body>
+
+</html>
